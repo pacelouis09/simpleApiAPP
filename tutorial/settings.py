@@ -58,7 +58,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:80",
     "http://127.0.0.1:80",
     "http://192.168.43.50:80",
-    "server1.terms-acceptance.com"
+    "http://server1.terms-acceptance.com"
 ]
 
 # Application definition
