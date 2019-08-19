@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tutorial/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+            <state relative-caret-position="405">
+              <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -194,12 +194,12 @@
       <workItem from="1565798012094" duration="437000" />
       <workItem from="1566146717275" duration="883000" />
       <workItem from="1566170721035" duration="1770000" />
-      <workItem from="1566173154339" duration="1380000" />
+      <workItem from="1566173154339" duration="1502000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60058000" />
+    <option name="totallyTimeSpent" value="60180000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -228,7 +228,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.500473" side_tool="true" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49952698" visible="true" weight="0.59553695" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49952698" visible="true" weight="0.18828452" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49952698" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -321,8 +321,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tutorial/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+        <state relative-caret-position="405">
+          <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
         </state>
       </provider>
     </entry>
