@@ -55,10 +55,10 @@ CORS_ORIGIN_WHITELIST = [
     # "https://sub.example.com",
     # "http://localhost:50377",
     # "http://127.0.0.1:50377",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://192.168.43.50:8080",
-
+    "http://localhost:80",
+    "http://127.0.0.1:80",
+    "http://192.168.43.50:80",
+    "server1.terms-acceptance.com"
 ]
 
 # Application definition
