@@ -12,12 +12,23 @@ from rest_framework import generics
 from rest_framework.viewsets import ViewSetMixin
 from rest_framework import renderers
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.views import APIView
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS #, token
+from rest_framework_api_key.permissions import HasAPIKey
+
+
 # from rest_framework.views import APIView
 # from rest_framework.response import Response
 # from rest_framework import status
 
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
+
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [HasAPIKey | IsAuthenticated]
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -26,6 +37,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ModelViewSet):
+    permission_classes = [HasAPIKey | IsAuthenticated]
     """
     API endpoint that allows groups to be viewed or edited.
     """
@@ -50,25 +62,39 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 
 class UserList(generics.ListAPIView):
+    permission_classes = [HasAPIKey | IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(ViewSetMixin, generics.RetrieveAPIView):
+    permission_classes = [HasAPIKey | IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class Customer(ViewSetMixin, generics.ListCreateAPIView):
-    queryset = Customer.objects.all()
+    permission_classes = [HasAPIKey | IsAuthenticated]
+    queryset = Customer.objects.all().order_by('id')
     serializer_class = CustomerSerializer
 
+
 class Account(ViewSetMixin, generics.ListCreateAPIView):
+    # authentication_classes = (TokenAuthentication, )
+    permission_classes = [HasAPIKey | IsAuthenticated]
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
+    def get(self, request, format=None):
+        content = {
+            'status': 'request was permitted'
+        }
+        return Response(content)
+
+
 class Background(ViewSetMixin, generics.ListCreateAPIView):
-    queryset = Background.objects.all()
+    permission_classes = [HasAPIKey | IsAuthenticated]
+    queryset = Background.objects.all().order_by('-id')
     serializer_class = BackgroundSerializer
 
 

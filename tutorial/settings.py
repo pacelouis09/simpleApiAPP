@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^$3a^sj35htwzxpd!f9&dl_1_!7&^#zfr9c8j3r*_x-vh!6opj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '199.192.27.105']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0', '162.213.250.56', '198.187.30.184']
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -51,11 +51,23 @@ CORS_ALLOW_HEADERS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:80",
-    "http://127.0.0.1:80",
-    "http://192.168.43.50:80",
-    "http://server1.terms-acceptance.com"
+    # "http://localhost:80",
+    # "http://server1.terms-acceptance.com",
 ]
+
+# API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
+
+DJANGO_COLORS="light;error=yellow/blue,blink;notice=magenta"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.TokenAuthentication'
+    # ],
+}
+
 
 # Application definition
 
@@ -69,7 +81,9 @@ INSTALLED_APPS = [
     'quickstart.apps.QuickstartConfig',
     'rest_framework',
     'rest_framework_api_key',
+    'rest_framework.authtoken',  # <-- Here
     'corsheaders',
+    'six'
 ]
 
 # REST_FRAMEWORK = {
@@ -78,6 +92,7 @@ INSTALLED_APPS = [
 # }
 
 MIDDLEWARE = [
+    # 'request-logging-middleware.RequestLoggingMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -94,8 +109,7 @@ ROOT_URLCONF = 'tutorial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,4 +172,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_URL = '/static/'
+# MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+# MEDIA_URL = '/media/'
+
+PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+
 STATIC_URL = '/static/'
+

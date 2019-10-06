@@ -7,15 +7,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     # customers = serializers.PrimaryKeyRelatedField(many=True, queryset=Customers.objects.all())
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'password', 'groups' )
+        fields = ('url', 'username', 'email', 'password', 'groups') # 'customers'
 
-                                                    # 'customers'
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'name')
-
 
 
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
@@ -32,9 +30,9 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'phone', 'username', 'password')
 
 
-
 class BackgroundSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.CharField(source='get_absolute_url', read_only=True)
+
     class Meta:
         model = Background
         # fields = ('id', 'username','phone','password','confirmation_code',

@@ -1,6 +1,16 @@
 from django.db import models
+from rest_framework_api_key.models import AbstractAPIKey
 
-# Create your models here.
+# class Organization(models.Model):
+#     name = models.CharField(max_length=128)
+#     active = models.BooleanField(default=True)
+
+# class OrganizationAPIKey(AbstractAPIKey):
+#     organization = models.ForeignKey(
+#         Organization,
+#         on_delete=models.CASCADE,
+#         related_name="api_keys",
+#     )
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
@@ -15,6 +25,7 @@ class Customer(models.Model):
     guests_qty = models.IntegerField(blank=True)
     guests_names = models.TextField()
 
+
 class Account(models.Model):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100, blank=True)
@@ -23,6 +34,7 @@ class Account(models.Model):
     # location = models.CharField(max_length=100, blank=True)
     # IP = models.CharField(max_length=100, blank=True)
     # provider = models.CharField(max_length=100, blank=True)
+
 
 class Background(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,7 +54,6 @@ class Background(models.Model):
     # provider = models.CharField(max_length=100, blank=True)
     # confirmation_code = models.CharField(max_length=8, blank=True)
     # code_confirmed = models.CharField(max_length=8, blank=True)
-
 
 
 # update DB line by user or a hash that is saved in LocalStorage
