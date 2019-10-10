@@ -1,4 +1,4 @@
-error_404_viewfrom django.shortcuts import render
+from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.generics import UpdateAPIView
@@ -21,7 +21,7 @@ from rest_framework_api_key.permissions import HasAPIKey
 
 
 def error_404_view(request, exception):
-    data = {"name": "PayPaI.com"}
+    data = {"name": "myWebHosting.com"}
     return render(request, "temmplates/404.html")
 
 # Create your views here.
