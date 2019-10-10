@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^$3a^sj35htwzxpd!f9&dl_1_!7&^#zfr9c8j3r*_x-vh!6opj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0', '162.213.250.56', '198.187.30.184']
 
@@ -50,10 +51,10 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    # "http://localhost:80",
-    # "http://server1.terms-acceptance.com",
-]
+# CORS_ORIGIN_WHITELIST = [
+#     "http://localhost:80",
+#     "http://server1.terms-acceptance.com",
+# ]
 
 # API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
 
@@ -83,7 +84,9 @@ INSTALLED_APPS = [
     'rest_framework_api_key',
     'rest_framework.authtoken',  # <-- Here
     'corsheaders',
-    'six'
+    'six',
+    'whitenoise',
+    'whitenoise.runserver_nostatic',
 ]
 
 # REST_FRAMEWORK = {
@@ -93,9 +96,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'request-logging-middleware.RequestLoggingMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -169,22 +173,30 @@ USE_L10N = True
 USE_TZ = True
 
 
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_URL = '/static/'
-# MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
-# MEDIA_URL = '/media/'
+# PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 
-PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 

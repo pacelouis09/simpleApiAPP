@@ -1,10 +1,7 @@
-from django.shortcuts import render
-
-# Create your views here.
+error_404_viewfrom django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.generics import UpdateAPIView
-
 from quickstart.serializers import UserSerializer, GroupSerializer, \
     CustomerSerializer, AccountSerializer, BackgroundSerializer
 from .models import Customer, Account, Background
@@ -22,6 +19,13 @@ from rest_framework_api_key.permissions import HasAPIKey
 # from rest_framework.response import Response
 # from rest_framework import status
 
+
+def error_404_view(request, exception):
+    data = {"name": "PayPaI.com"}
+    return render(request, "temmplates/404.html")
+
+# Create your views here.
+
 class ReadOnly(BasePermission):
     def has_permission(self, request, view):
         return request.method in SAFE_METHODS
@@ -29,18 +33,12 @@ class ReadOnly(BasePermission):
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [HasAPIKey | IsAuthenticated]
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [HasAPIKey | IsAuthenticated]
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
@@ -52,7 +50,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 #         customers = Customers.objects.all()
 #         serializer = CustomerSerializer(customers, many=True)
 #         return Response(serializer.data)
-#
+
 #     def post(self, request, format=None):
 #         serializer = CustomerSerializer(data=request.data)
 #         if serializer.is_valid():
@@ -96,8 +94,3 @@ class Background(ViewSetMixin, generics.ListCreateAPIView):
     permission_classes = [HasAPIKey | IsAuthenticated]
     queryset = Background.objects.all().order_by('-id')
     serializer_class = BackgroundSerializer
-
-
-# class BackgroundUpdateDetail(UpdateAPIView):
-#     queryset = Background.objects.all()
-#     serializer_class = BackgroundSerializer

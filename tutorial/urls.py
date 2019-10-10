@@ -21,9 +21,16 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from quickstart import views
+from django.conf.urls import handler404
 
+# from django.core.exceptions import PermissionDenied
+# from django.http import HttpResponse
 
+# def response_error_handler(request, exceptions=None):
+#     return HttpResponse('Error handler content', status=404)
 
+# def permission_denied_view(request):
+#     raise PermissionDenied
 
 router = routers.DefaultRouter()
 
@@ -37,16 +44,25 @@ router.register(r'background', views.Background)
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
+    # path('403/', permission_denied_view),
     path('', include(router.urls)),
-    path('', admin.site.urls),
+    # path('', admin.site.urls),
     path('admin/', admin.site.urls),
+    path('', include('rest_framework.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# urlpatterns += i18n_patterns(
-#     path('admin/', admin.site.urls),
-# )
 
 urlpatterns += router.urls
 
+handler404 = "quickstart.views.error_404_view"
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]
+
+# handler403 = response_error_handler
